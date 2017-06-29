@@ -6,16 +6,23 @@ class Coops_model extends CI_Model {
                 $this->load->database();
         }
 		
-		public function get_coops($slug = FALSE)
-		{
-				if ($slug === FALSE)
-				{
-						$query = $this->db->get('coops');
-						return $query->result_array();
-				}
+		public function get_places() {
+			$this->db->select('*')->from('places');
+			$query = $this->db->get();
+			return $query->result_array();
+		}
 
-				$query = $this->db->get_where('coops', array('slug' => $slug));
-				return $query->row_array();
+		
+		public function get_coops($place_id)
+		{
+
+			$this->db->select('*')->from('coops');
+			//$this->db->join('places', 'places.place_id = coops.place_id');
+			$this->db->where('place_id', $place_id);
+			$query = $this->db->get();
+			return $query->result_array();
+				
+
 		}
 		
 		public function set_coops()
@@ -36,18 +43,14 @@ class Coops_model extends CI_Model {
 				'website' => $this->input->post('website'),
 				'street' => $this->input->post('street'),
 				'postcode' => $this->input->post('postcode'),
-				'legal' => $this->input->post('legal'),
 				'founding_year' => $this->input->post('founding_year'),
-				'registrar' => $this->input->post('registrar'),
-				'registered_num' => $this->input->post('registered_num'),
 				'members' => $this->input->post('members'),
 				'providesa' => $this->input->post('providesa'),
 				'providesb' => $this->input->post('providesb'),
 				'providesc' => $this->input->post('providesc'),
 				'link_to_page' => $this->input->post('link_to_page'),
 				'coop_grouping' => $this->input->post('coop_grouping'),
-				'longitude' => $this->input->post('longitude'),
-				'latitude' => $this->input->post('latitude')
+				'place_id' => $this->input->post('place_id')
 							
 			);
 

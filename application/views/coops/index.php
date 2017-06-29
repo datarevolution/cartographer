@@ -20,29 +20,42 @@
 			mymap.addLayer(marker);
 		}
 		
+var json =  $.getJSON("https://localhost/cartographer/index.php/coops/json/", function(data) {
+	$.each(data['places'], function(key, value) {
+		console.log(key);
+		console.log(value['coordinates']['longitude']);
+		console.log(value['coordinates']['latitude']);
+		
+		addMarker(value['coordinates']['latitude'],value['coordinates']['longitude']);
+		var popupContent = "<h2>Co-ops in " + key + "</h2>";
+		
+		$.each(value['coops'], function (c_key, c_value) {
+			popupContent = popupContent + "<h3>" + c_key + "</h3><p>" + c_value['description'] + "</p>";
+		});
+		
+		marker.bindPopup(popupContent);
+	});
+});
+
+
+		
+
+
+		
+		/* 
 	<?php foreach ($coops as $coop): ?>
 			   addMarker(<?php echo $coop['latitude']; ?>,<?php echo $coop['longitude']; ?>);
 			   var popupContent = '<h3><?php echo $coop['name']; ?></h3> <p><?php echo $coop['description']; ?></p><p><a href="<?php echo $coop['link_to_page']; ?>">Link to co-op page</a></p>';
 			   marker.bindPopup(popupContent);
 			   
 
-		   <?php endforeach; ?>
+		   <?php endforeach; ?> */
 
 	});
 	
 
 	</script>
 	
-	<h2><?php echo $name; ?></h2>
-
+	<h2><?php //echo $name; ?></h2>
+<p>Co-op locations are approximate due to security concerns.</p>
 <div id="mapid"></div>
-
-<?php foreach ($coops as $coop): ?>
-
-        <h3><?php echo $coop['name']; ?></h3>
-        <div class="main">
-                <?php echo $coop['description']; ?>
-        </div>
-
-<?php endforeach; ?>
-

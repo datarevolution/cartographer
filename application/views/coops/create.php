@@ -1,6 +1,18 @@
 <h2><?php echo $name; ?></h2>
 
-<?php echo validation_errors(); ?>
+<?php 
+$form_errors = validation_errors();
+if ($form_errors != null) {
+	?>
+	<div id="form_errors">
+	<h3>Please fill in this information</h3>
+	<?php
+	echo $form_errors;
+	?>
+	</div>
+	<?php
+} ?>
+
 
 <?php echo form_open('coops/create'); ?>
 
@@ -41,8 +53,7 @@
 		<option value="fa-globe">fa-globe</option>
 	</select>
 	
-	<input type="hidden" name="longitude" id="maplng" />
-	<input type="hidden" name="latitude" id="maplat" />
+	<input type="hidden" name="place_id" id="place_id" />
 	
 	<p><label for="email_private">Email (private)</label></p>
     <input type="input" name="email_private" />
@@ -68,27 +79,12 @@
 
 	<p><label for="coop_grouping">Co-op grouping</label></p>
     <select name="coop_grouping">
-		<option value="None">None</option>
+		<option disabled selected value></option>
 		<option value="Hevgurtin">Hevgurtin</option>
-	</select>
-	
-	<p><label for="legal">Legal status</label></p>
-    <select name="legal">
-		<option value="L1">Informal Group</option>
-		<option value="L2">Co-operative</option>
-		<option value="L3">Company</option>
-		<option value="L4">Non-Profit Organisation</option>
-		<option value="L5">Social Enterprise</option>
 	</select>
 	
 	<p><label for="founding_year">Founding year</label></p>
     <input type="input" name="founding_year" />
-	
-	<p><label for="registrar">Registrar</label></p>
-    <input type="input" name="registrar" />
-	
-	<p><label for="registered_num">Registered number</label></p>
-    <input type="input" name="registered_num" />
 	
 	<p><label for="members">Number of members</label></p>
     <input type="input" name="members" />
@@ -98,6 +94,7 @@
 	<fieldset>		
 	<p><label for="providesa">Activity provided</label></p>
     <select name="providesa">
+		<option disabled selected value></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -121,8 +118,9 @@
 		<option value="A21">International diplomacy and cooperation</option>
 	</select>
 	
-		<p><label for="providesb">Activity provided</label></p>
+	<p><label for="providesb">Activity provided</label></p>
     <select name="providesb">
+		<option disabled selected value></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -146,8 +144,9 @@
 		<option value="A21">International diplomacy and cooperation</option>
 	</select>
 	
-		<p><label for="providesc">Activity provided</label></p>
+	<p><label for="providesc">Activity provided</label></p>
     <select name="providesc">
+		<option disabled selected value></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -188,22 +187,50 @@
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'mapbox.streets'
 		}).addTo(mymap);
-		
+				
 		var marker;
 		
+		 		function addMarker(lat,lng, place_id) {
+			marker = new L.marker([lat, lng]).on('click',onMarkerClick);
+			marker.place_id = place_id;
+			mymap.addLayer(marker);
+		}
+		
+		    var customOptions =
+        {
+        'closeButton': false,
+        'className' : 'placePopup'
+        }
+		
+	<?php foreach ($coops as $coop): ?>
+			   addMarker(<?php echo $coop['latitude']; ?>,<?php echo $coop['longitude']; ?>, <?php echo $coop['place_id']; ?>);
+			   var popupContent = '<h3><?php echo $coop['place_name']; ?></h3>';
+			   marker.bindPopup(popupContent, customOptions);
+			   
+
+		   <?php endforeach; ?>
+		   
+		   function onMarkerClick(e) {
+			  console.log(e.target.place_id);
+			  $("input#place_id").val(e.target.place_id);
+		   }
+		   
+
 		function onMapClick(e) {
-			if(marker) {
+			
+			
+/* 			if(marker) {
 				mymap.removeLayer(marker);
 			}
 			marker = new L.marker([e.latlng.lat, e.latlng.lng]);
 			mymap.addLayer(marker);
 			
 			$("input#maplng").val(e.latlng.lng);
-			$("input#maplat").val(e.latlng.lat);
+			$("input#maplat").val(e.latlng.lat); */
 			
 		}
 
-		mymap.on('click', onMapClick);
+		//mymap.on('click', onMapClick);
 
 
 		

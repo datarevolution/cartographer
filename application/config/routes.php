@@ -49,7 +49,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route[LOGIN_PAGE] = 'examples/login';
 $route['coops/create'] = 'coops/create';
+$route['coops/json'] = 'coops/json';
 $route['coops/(:any)'] = 'coops/view/$1';
 $route['coops'] = 'coops';
 $route['(:any)'] = 'pages/view/$1';

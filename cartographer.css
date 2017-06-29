@@ -59,3 +59,12 @@ form input[type=submit] {
 form input[type=submit]:hover {
 	background:#acacac;
 }
+
+div#form_errors {
+	border: 2px solid red;
+    padding: 0 30px;
+	font-weight:bold;
+}
+div#form_errors h3 {
+	color:red;
+}
