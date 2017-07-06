@@ -3,7 +3,7 @@
  
 
    $(document).ready(function(){
-		var mymap = L.map('mapid').setView([36.33, 39.55], 6);
+		var mymap = L.map('mapid').setView([36.33, 39.55], 8);
 
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 			maxZoom: 18,
@@ -15,25 +15,42 @@
 		
 		var marker;
 		
-		 		function addMarker(lat,lng) {
-			marker = new L.marker([lat, lng]);
+		 		function addMarker(lat,lng, popupContent, coopCount) {
+					var numberIcon = L.divIcon({
+      className: "number-icon",
+      iconSize: [25, 36],
+      iconAnchor: [10, 44],
+      popupAnchor: [3, -40],
+      html: coopCount        
+});
+			marker = new L.marker([lat, lng], {
+				icon: numberIcon
+			}).on('click', function() {
+				$('#infoid').html(popupContent);
+				mymap.panTo(new L.LatLng(lat,lng));
+			});
 			mymap.addLayer(marker);
 		}
 		
-var json =  $.getJSON("https://localhost/cartographer/index.php/coops/json/", function(data) {
+		
+var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/json/", function(data) {
 	$.each(data['places'], function(key, value) {
 		console.log(key);
 		console.log(value['coordinates']['longitude']);
 		console.log(value['coordinates']['latitude']);
 		
-		addMarker(value['coordinates']['latitude'],value['coordinates']['longitude']);
-		var popupContent = "<h2>Co-ops in " + key + "</h2>";
+		
+		var popupContent = "<div id=\"inner_info\"><h2>Co-ops in and around " + key + "</h2>";
+		var coopCount = 0;
 		
 		$.each(value['coops'], function (c_key, c_value) {
-			popupContent = popupContent + "<h3>" + c_key + "</h3><p>" + c_value['description'] + "</p>";
+			coopCount++;
+			popupContent = popupContent + "<div class=\"coop_info\"><h3><i class=\"fa " + c_value['icon'] + " fa-1g\"></i><a href=\"" + c_value['url'] + "\">" + c_key + "</a></h3><p>" + c_value['description'] + "</p></div>";
 		});
 		
-		marker.bindPopup(popupContent);
+		popupContent = popupContent + "</div>";
+		addMarker(value['coordinates']['latitude'],value['coordinates']['longitude'], popupContent, coopCount);
+		
 	});
 });
 
@@ -56,6 +73,4 @@ var json =  $.getJSON("https://localhost/cartographer/index.php/coops/json/", fu
 
 	</script>
 	
-	<h2><?php //echo $name; ?></h2>
-<p>Co-op locations are approximate due to security concerns.</p>
 <div id="mapid"></div>

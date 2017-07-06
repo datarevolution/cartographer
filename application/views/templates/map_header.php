@@ -37,4 +37,5 @@
 		</ul>
 		
 
-		<div id="main">
+		<div id="map_main">
+		<div id="infoid"></div>

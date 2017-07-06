@@ -33,25 +33,26 @@ if ($form_errors != null) {
 
 <fieldset>
 
+	<p class="label map_label">Select nearest town/city</p>
 	<div id="mapid"></div>
 	
-	<p><label for="icon">Map icon</label></p>
-    <select name="icon">
-		<option value="fa-leaf">fa-leaf</option>
-		<option value="fa-tree">fa-tree</option>
-		<option value="fa-cog">fa-cog</option>
-		<option value="fa-bolt">fa-bolt</option>
-		<option value="fa-wrench">fa-wrench</option>
-		<option value="fa-shopping-cart">fa-shopping-cart</option>
-		<option value="fa-bicycle">fa-bicycle</option>
-		<option value="fa-coffee">fa-coffee</option>
-		<option value="fa-laptop">fa-laptop</option>
-		<option value="fa-gbp">fa-gbp</option>
-		<option value="fa-home">fa-home</option>
-		<option value="fa-book ">fa-book</option>
-		<option value="fa-heart">fa-heart</option>
-		<option value="fa-globe">fa-globe</option>
-	</select>
+	<div id="icon_selector">
+	<p class="label">Map icon</p>
+		<i name="fa-leaf" class="fa fa-leaf fa-5x"></i><i name="fa-paw" class="fa fa-paw fa-5x"></i><i name="fa-shopping-basket" class="fa fa-shopping-basket fa-5x"></i><i name="fa-scissors" class="fa fa-scissors fa-5x"></i><i name="fa-spoon" class="fa fa-spoon fa-5x"></i><i name="fa-industry" class="fa fa-industry fa-5x"></i><i name="fa-pie-chart" class="fa fa-pie-chart fa-5x"></i><i name="fa-birthday-cake" class="fa fa-birthday-cake fa-5x"></i><i name="fa-archive" class="fa fa-archive fa-5x"></i><i name="fa-tint" class="fa fa-tint fa-5x"></i><i name="fa-heartbeat" class="fa fa-heartbeat fa-5x"></i><i name="fa-recycle" class="fa fa-recycle fa-5x"></i><i name="fa-handshake-o" class="fa fa-handshake-o fa-5x"></i><i name="fa-venus" class="fa fa-venus fa-5x"></i>
+	</div>
+		
+	
+	<script>
+	
+	$("i.fa").click( function() {
+		$("i.selected").removeClass("selected");
+		$(this).addClass("selected");
+		$("input#map_icon").val($(this).attr("name"));
+	});
+	
+	</script>
+	
+	<input type="hidden" name="icon" id="map_icon" />
 	
 	<input type="hidden" name="place_id" id="place_id" />
 	
@@ -79,7 +80,7 @@ if ($form_errors != null) {
 
 	<p><label for="coop_grouping">Co-op grouping</label></p>
     <select name="coop_grouping">
-		<option disabled selected value></option>
+		<option selected value=""></option>
 		<option value="Hevgurtin">Hevgurtin</option>
 	</select>
 	
@@ -94,7 +95,7 @@ if ($form_errors != null) {
 	<fieldset>		
 	<p><label for="providesa">Activity provided</label></p>
     <select name="providesa">
-		<option disabled selected value></option>
+		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -120,7 +121,7 @@ if ($form_errors != null) {
 	
 	<p><label for="providesb">Activity provided</label></p>
     <select name="providesb">
-		<option disabled selected value></option>
+		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -146,7 +147,7 @@ if ($form_errors != null) {
 	
 	<p><label for="providesc">Activity provided</label></p>
     <select name="providesc">
-		<option disabled selected value></option>
+		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
 		<option value="A03">Craftmanship and manufacturing</option>
@@ -235,6 +236,4 @@ if ($form_errors != null) {
 
 		
 	});
-	
-	
-	</script>
+        </script>

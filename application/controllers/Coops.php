@@ -32,7 +32,7 @@ class Coops extends MY_Controller {
 				//$data['coops'] = $this->coops_model->get_coops();
 				$data['name'] = 'Map of all coops';
 
-				$this->load->view('templates/header', $data);
+				$this->load->view('templates/map_header', $data);
 				$this->load->view('coops/index', $data);
 				$this->load->view('templates/footer');
 		}

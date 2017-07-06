@@ -14,6 +14,7 @@
 				<?php foreach ($coops[$place['place_id']] as $coop): ?>
 				"<?php echo $coop['name']; ?>" : {
 					"description" : "<?php echo $coop['description']; ?>",
+					"icon" : "<?php echo $coop['icon']; ?>",
 					"url" : "<?php echo $coop['link_to_page']; ?>"
 				}<?php if (next($coops[$place['place_id']])==true) echo ","; ?>
 				<?php endforeach; ?>
