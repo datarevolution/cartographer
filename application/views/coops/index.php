@@ -27,7 +27,6 @@
 				icon: numberIcon
 			}).on('click', function() {
 				$('#infoid').html(popupContent);
-				mymap.panTo(new L.LatLng(lat,lng));
 			});
 			mymap.addLayer(marker);
 		}
@@ -54,19 +53,6 @@ var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/
 	});
 });
 
-
-		
-
-
-		
-		/* 
-	<?php foreach ($coops as $coop): ?>
-			   addMarker(<?php echo $coop['latitude']; ?>,<?php echo $coop['longitude']; ?>);
-			   var popupContent = '<h3><?php echo $coop['name']; ?></h3> <p><?php echo $coop['description']; ?></p><p><a href="<?php echo $coop['link_to_page']; ?>">Link to co-op page</a></p>';
-			   marker.bindPopup(popupContent);
-			   
-
-		   <?php endforeach; ?> */
 
 	});
 	
