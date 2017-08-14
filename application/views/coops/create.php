@@ -62,17 +62,9 @@ if ($form_errors != null) {
 	<p><label for="email_public">Email (public)</label></p>
     <input type="input" name="email_public" />
 	
-	<p><label for="phone">Phone</label></p>
-    <input type="input" name="phone" />
-	
 	<p><label for="website">Website</label></p>
     <input type="input" name="website" />
 	
-	<p><label for="street">Street</label></p>
-    <input type="input" name="street" />
-	
-	<p><label for="postcode">Postcode</label></p>
-    <input type="input" name="postcode" />
 
 </fieldset>
 
@@ -89,6 +81,9 @@ if ($form_errors != null) {
 	
 	<p><label for="members">Number of members</label></p>
     <input type="input" name="members" />
+	
+	<p><label for="workers">Number of workers</label></p>
+    <input type="input" name="workers" />
 	
 	</fieldset>
 	

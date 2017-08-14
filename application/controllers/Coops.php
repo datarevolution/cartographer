@@ -71,8 +71,6 @@ class Coops extends MY_Controller {
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('sentence', 'Sentence', 'required');
 			$this->form_validation->set_rules('description', 'Description', 'required');
-			//$this->form_validation->set_rules('longitude', 'Longitude', 'required');
-			//$this->form_validation->set_rules('latitude', 'Latitude', 'required');
 			$this->form_validation->set_rules('link_to_page', 'Link to page', 'required');
 			
 			$this->form_validation->set_rules('private_email', 'Private email address', 'valid_email');
