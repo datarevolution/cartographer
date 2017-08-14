@@ -38,8 +38,30 @@ var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/
 		console.log(value['coordinates']['longitude']);
 		console.log(value['coordinates']['latitude']);
 		
+
 		
 		var popupContent = "<div id=\"inner_info\"><h2>Co-ops in and around " + key + "</h2>";
+		var nameCount = 0;
+		$.each(value['names'], function(c_key, c_value) {
+		
+			if (c_value != "") {
+				
+				if (nameCount > 0) {
+					popupContent = popupContent + " / ";
+				} else {
+					popupContent = popupContent + "<p class= \"names\">";
+				}
+				
+				popupContent = popupContent + c_value;
+				
+				if (nameCount == value['names']) {
+					popupContent = popupContent + "</p>";
+				}
+				
+				nameCount++;
+			}
+		});
+		
 		var coopCount = 0;
 		
 		$.each(value['coops'], function (c_key, c_value) {

@@ -17,8 +17,20 @@ if ($form_errors != null) {
 <?php echo form_open('places/create'); ?>
 
 <fieldset>
-    <p><label for="place_name">Name</label></p>
+    <p><label for="place_name">English name</label></p>
     <input type="input" name="place_name" />
+	
+	<p><label for="arabic_name">Arabic name</label></p>
+    <input type="input" name="arabic_name" />
+	
+	<p><label for="syriac_name">Syriac name</label></p>
+    <input type="input" name="syriac_name" />
+	
+	<p><label for="kurdish_name">Kurdish name</label></p>
+    <input type="input" name="kurdish_name" />
+	
+	<p><label for="other_name">Other name</label></p>
+    <input type="input" name="other_name" />
 	
 	<p><label for="longitude">Longitude</label></p>
     <textarea name="longitude"></textarea>

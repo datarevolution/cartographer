@@ -20,7 +20,11 @@ class Places_model extends CI_Model {
 			$data = array(
 				'place_name' => $this->input->post('place_name'),
 				'longitude' => $this->input->post('longitude'),
-				'latitude' => $this->input->post('latitude')							
+				'latitude' => $this->input->post('latitude'),
+				'kurdish_name' => $this->input->post('kurdish_name'),
+				'syriac_name' => $this->input->post('syriac_name'),
+				'arabic_name' => $this->input->post('arabic_name'),
+				'other_name' => $this->input->post('other_name')
 			);
 
 			return $this->db->insert('places', $data);

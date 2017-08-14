@@ -5,10 +5,16 @@
 	"places" : {	
 	<?php foreach ($places as $place): ?>
 
-		"<?php echo $place['place_name']; ?>" : {
+		<?php echo json_encode($place['place_name']); ?> : {
 			"coordinates" : {
 				"longitude" : "<?php echo $place['longitude']; ?>",
 				"latitude" : "<?php echo $place['latitude']; ?>"
+			},
+			"names" : {
+				"kurdish" : <?php echo json_encode($place['kurdish_name']); ?>,
+				"syriac" : <?php echo json_encode($place['syriac_name']); ?>,
+				"arabic" : <?php echo json_encode($place['arabic_name']); ?>,
+				"other" : <?php echo json_encode($place['other_name']); ?>
 			},
 			"coops" : {
 				<?php foreach ($coops[$place['place_id']] as $coop): ?>
