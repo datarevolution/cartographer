@@ -54,7 +54,7 @@ var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/
 				
 				popupContent = popupContent + c_value;
 				
-				if (nameCount == value['names']) {
+				if (nameCount == value['names'].length) {
 					popupContent = popupContent + "</p>";
 				}
 				
