@@ -182,11 +182,11 @@ if ($form_errors != null) {
 	$('[name="<?php echo $coop['icon']; ?>"]').addClass("selected");
 	
 	$('select#providesa option[selected]').attr("selected",false);
-	$('select#providesa option[value=<?php echo $coop['providesa']; ?>]').attr("selected",true);
+	$('select#providesa option[value="<?php echo $coop['providesa']; ?>"]').attr("selected",true);
 	$('select#providesb option[selected]').attr("selected",false);
-	$('select#providesb option[value=<?php echo $coop['providesb']; ?>]').attr("selected",true);
+	$('select#providesb option[value="<?php echo $coop['providesb']; ?>"]').attr("selected",true);
 	$('select#providesc option[selected]').attr("selected",false);
-	$('select#providesc option[value=<?php echo $coop['providesc']; ?>]').attr("selected",true);
+	$('select#providesc option[value="<?php echo $coop['providesc']; ?>"]').attr("selected",true);
 	   
 		var mymap = L.map('mapid').setView([36.33, 39.55], 6);
 
