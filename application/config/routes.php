@@ -51,10 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route[LOGIN_PAGE] = 'examples/login';
 $route['coops/create'] = 'coops/create';
+$route['coops/edit/(:any)'] = 'coops/edit/$1';
+$route['coops/delete/(:any)'] = 'coops/delete/$1';
 $route['coops/json'] = 'coops/json';
 $route['coops/(:any)'] = 'coops/view/$1';
 $route['coops'] = 'coops';
 $route['places/create'] = 'places/create';
+$route['places/edit/(:any)'] = 'places/edit/$1';
+$route['places/delete/(:any)'] = 'places/delete/$1';
 $route['places/(:any)'] = 'places/view/$1';
 $route['places'] = 'places';
 $route['(:any)'] = 'pages/view/$1';

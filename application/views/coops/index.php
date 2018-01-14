@@ -13,6 +13,13 @@
 			id: 'mapbox.streets'
 		}).addTo(mymap);
 		
+		//disable zoomControl when initializing map (which is topleft by default)
+		
+		//add zoom control with your options
+		L.control.zoom({
+			 position:'bottomright'
+		}).addTo(mymap);
+		
 		var marker;
 		
 		 		function addMarker(lat,lng, popupContent, coopCount) {
@@ -40,7 +47,7 @@ var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/
 		
 
 		
-		var popupContent = "<div id=\"inner_info\"><h2>Co-ops in and around " + key + "</h2>";
+		var popupContent = "<div id=\"inner_info\"><h2>Co-ops in and around " + key + "<span class=\"editplace\"><a href=\"../places/edit/" + value['place_id'] + "\">[edit " + key + "]</a> - <a href=\"../places/delete/" + value['place_id'] + "\">[delete " + key + "]</a></span></h2>";
 		var nameCount = 0;
 		$.each(value['names'], function(c_key, c_value) {
 		
@@ -66,7 +73,7 @@ var json =  $.getJSON("<?php echo $this->config->base_url(); ?>/index.php/coops/
 		
 		$.each(value['coops'], function (c_key, c_value) {
 			coopCount++;
-			popupContent = popupContent + "<div class=\"coop_info\"><h3><i class=\"fa " + c_value['icon'] + " fa-1g\"></i><a href=\"" + c_value['url'] + "\">" + c_key + "</a></h3><p>" + c_value['description'] + "</p></div>";
+			popupContent = popupContent + "<div class=\"coop_info\"><h3><i class=\"fa " + c_value['icon'] + " fa-1g\"></i><a href=\"" + c_value['url'] + "\">" + c_key + "</a></h3><p class=\"edit\"><a href=\"edit/" + c_value['id'] + "\">[edit]</a> - <a href=\"delete/" + c_value['id'] + "\">[delete]</a></p><p>" + c_value['description'] + "</p></div>";
 		});
 		
 		popupContent = popupContent + "</div>";

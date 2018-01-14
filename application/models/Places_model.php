@@ -12,8 +12,16 @@ class Places_model extends CI_Model {
 			return $query->result_array();
 		}
 
+		public function get_place($place_id)
+		{
+			$this->db->select('*')->from('places');
+			$this->db->where('place_id', $place_id);
+			$query = $this->db->get();
+			return $query->row_array();
+		}
 		
-		public function set_places()
+		
+		public function set_places($id=0)
 		{
 			$this->load->helper('url');
 
@@ -26,8 +34,22 @@ class Places_model extends CI_Model {
 				'arabic_name' => $this->input->post('arabic_name'),
 				'other_name' => $this->input->post('other_name')
 			);
-
-			return $this->db->insert('places', $data);
+		
+			
+			if ($id == 0) {
+				return $this->db->insert('places', $data);
+			} else {
+				$this->db->where('place_id', $id);
+				return $this->db->update('places', $data);
+			}
 		}
+		
+		
+	public function delete_place($id)
+    {
+        $this->db->where('place_id', $id);
+        return $this->db->delete('places');
+    }
+		
 		
 }

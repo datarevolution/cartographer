@@ -25,7 +25,15 @@ class Coops_model extends CI_Model {
 
 		}
 		
-		public function set_coops()
+		public function get_coop($coop_id)
+		{
+			$this->db->select('*')->from('coops');
+			$this->db->where('id', $coop_id);
+			$query = $this->db->get();
+			return $query->row_array();
+		}
+		
+		public function set_coops($id=0)
 		{
 			$this->load->helper('url');
 
@@ -51,8 +59,20 @@ class Coops_model extends CI_Model {
 				'place_id' => $this->input->post('place_id')
 							
 			);
+				
+			if ($id == 0) {
+				return $this->db->insert('coops', $data);
+			} else {
+				$this->db->where('id', $id);
+				return $this->db->update('coops', $data);
+			}
 
-			return $this->db->insert('coops', $data);
 		}
+		
+	public function delete_coop($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('coops');
+    }
 		
 }

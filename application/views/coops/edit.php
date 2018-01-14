@@ -1,4 +1,4 @@
-<h2><?php echo $name; ?></h2>
+<h2><?php //echo $name; ?></h2>
 
 <?php 
 $form_errors = validation_errors();
@@ -14,20 +14,22 @@ if ($form_errors != null) {
 } ?>
 
 
-<?php echo form_open('coops/create'); ?>
+<?php echo form_open('coops/edit/' . $coop['id']); ?>
+
+<input type="hidden" name="id" id="id"  value="<?php echo $coop['id']; ?>"/>
 
 <fieldset>
     <p><label for="name">Name</label></p>
-    <input type="input" name="name" />
+    <input type="input" name="name" value="<?php echo $coop['name']; ?>" />
 	
 	<p><label for="sentence">Sentence</label></p>
-    <textarea name="sentence"></textarea>
+    <textarea name="sentence"><?php echo $coop['sentence']; ?></textarea>
 	
     <p><label for="description">Description</label></p>
-    <textarea name="description"></textarea>
+    <textarea name="description"><?php echo $coop['description']; ?></textarea>
 	
 	<p><label for="link_to_page">Link to page</label></p>
-	<input type="input" name="link_to_page" />
+	<input type="input" name="link_to_page"  value="<?php echo $coop['link_to_page']; ?>"/>
 	
 </fieldset>
 
@@ -43,6 +45,7 @@ if ($form_errors != null) {
 		
 	
 	<script>
+
 	
 	$("i.fa").click( function() {
 		$("i.selected").removeClass("selected");
@@ -52,18 +55,18 @@ if ($form_errors != null) {
 	
 	</script>
 	
-	<input type="hidden" name="icon" id="map_icon" />
+	<input type="hidden" name="icon" id="map_icon"  value="<?php echo $coop['icon']; ?>" />
 	
-	<input type="hidden" name="place_id" id="place_id" />
+	<input type="hidden" name="place_id" id="place_id"  value="<?php echo $coop['place_id']; ?>"/>
 	
 	<p><label for="email_private">Email (private)</label></p>
-    <input type="input" name="email_private" />
+    <input type="input" name="email_private"  value="<?php echo $coop['email_private']; ?>" />
 	
 	<p><label for="email_public">Email (public)</label></p>
-    <input type="input" name="email_public" />
+    <input type="input" name="email_public"  value="<?php echo $coop['email_public']; ?>"/>
 	
 	<p><label for="website">Website</label></p>
-    <input type="input" name="website" />
+    <input type="input" name="website" value="<?php echo $coop['website']; ?>" />
 	
 
 </fieldset>
@@ -77,19 +80,19 @@ if ($form_errors != null) {
 	</select>
 	
 	<p><label for="founding_year">Founding year</label></p>
-    <input type="input" name="founding_year" />
+    <input type="input" name="founding_year" value="<?php echo $coop['founding_year']; ?>" />
 	
 	<p><label for="members">Number of members</label></p>
-    <input type="input" name="members" />
+    <input type="input" name="members" value="<?php echo $coop['members']; ?>" />
 	
 	<p><label for="workers">Number of workers</label></p>
-    <input type="input" name="workers" />
+    <input type="input" name="workers" value="<?php echo $coop['workers']; ?>" />
 	
 	</fieldset>
 	
 	<fieldset>		
 	<p><label for="providesa">Activity provided</label></p>
-    <select name="providesa">
+    <select name="providesa" id="providesa">
 		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
@@ -115,7 +118,7 @@ if ($form_errors != null) {
 	</select>
 	
 	<p><label for="providesb">Activity provided</label></p>
-    <select name="providesb">
+    <select name="providesb" id="providesb">
 		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
@@ -141,7 +144,7 @@ if ($form_errors != null) {
 	</select>
 	
 	<p><label for="providesc">Activity provided</label></p>
-    <select name="providesc">
+    <select name="providesc" id="providesc">
 		<option selected value=""></option>
 		<option value="A01">Agriculture and environment</option>
 		<option value="A02">Mining and quarrying</option>
@@ -168,12 +171,23 @@ if ($form_errors != null) {
 </fieldset>
 
 	
-    <input type="submit" name="submit" value="Create coop" />
+    <input type="submit" name="edit" value="Edit" />
 
 </form>
 
  <script>
    $(document).ready(function(){
+	   
+	   
+	$('[name="<?php echo $coop['icon']; ?>"]').addClass("selected");
+	
+	$('select#providesa option[selected]').attr("selected",false);
+	$('select#providesa option[value=<?php echo $coop['providesa']; ?>]').attr("selected",true);
+	$('select#providesb option[selected]').attr("selected",false);
+	$('select#providesb option[value=<?php echo $coop['providesb']; ?>]').attr("selected",true);
+	$('select#providesc option[selected]').attr("selected",false);
+	$('select#providesc option[value=<?php echo $coop['providesc']; ?>]').attr("selected",true);
+	   
 		var mymap = L.map('mapid').setView([36.33, 39.55], 6);
 
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -198,10 +212,13 @@ if ($form_errors != null) {
         'className' : 'placePopup'
         }
 		
-	<?php foreach ($coops as $coop): ?>
-			   addMarker(<?php echo $coop['latitude']; ?>,<?php echo $coop['longitude']; ?>, <?php echo $coop['place_id']; ?>);
-			   var popupContent = '<h3><?php echo $coop['place_name']; ?></h3>';
+	<?php foreach ($places as $place): ?>
+			   addMarker(<?php echo $place['latitude']; ?>,<?php echo $place['longitude']; ?>, <?php echo $place['place_id']; ?>);
+			   var popupContent = '<h3><?php echo $place['place_name']; ?></h3>';
 			   marker.bindPopup(popupContent, customOptions);
+			   
+			  
+			  <?php if ($place['place_id'] == $coop['place_id']) { ?> marker.openPopup();  <?php } ?>
 			   
 
 		   <?php endforeach; ?>

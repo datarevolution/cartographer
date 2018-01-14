@@ -10,6 +10,7 @@
 				"longitude" : "<?php echo $place['longitude']; ?>",
 				"latitude" : "<?php echo $place['latitude']; ?>"
 			},
+			"place_id" : <?php echo $place['place_id']; ?>,
 			"names" : {
 				"kurdish" : <?php echo json_encode($place['kurdish_name']); ?>,
 				"syriac" : <?php echo json_encode($place['syriac_name']); ?>,
@@ -21,7 +22,8 @@
 				<?php echo json_encode($coop['name']); ?> : {
 					"description" : <?php echo json_encode($coop['description']); ?>,
 					"icon" : "<?php echo $coop['icon']; ?>",
-					"url" : <?php echo json_encode($coop['link_to_page']); ?>
+					"url" : <?php echo json_encode($coop['link_to_page']); ?>,
+					"id" : <?php echo json_encode($coop['id']); ?>
 				}<?php if (next($coops[$place['place_id']])==true) echo ","; ?>
 				<?php endforeach; ?>
 			}

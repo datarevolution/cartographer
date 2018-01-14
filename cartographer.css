@@ -158,6 +158,11 @@ p.map_label {
 	margin-bottom: 30px;
 }
 
+#infoid h2 span.editplace {
+	font-size:50%;
+	display:block;
+}
+
 #infoid .fa {
 	letter-spacing:15px;
 }
