@@ -10,7 +10,7 @@
         <body>
 	
 		<ul id="nav">
-			<li><a href="/cartographer/index.php/coops/">Show all co-ops</a></li>
+			<li><a href="/cartographer/index.php/coops">Show all co-ops</a></li>
 			<li><a href="/cartographer/index.php/coops/create/">Add new co-op</a></li>
 			<!---<li><a href="/cartographer/index.php/places/">Show all places</a></li>--->
 			<li><a href="/cartographer/index.php/places/create/">Add new place</a></li>
