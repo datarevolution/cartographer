@@ -60,7 +60,7 @@ class Places extends MY_Controller {
 				else
 				{
 					$this->places_model->set_places($id);
-					redirect( base_url() . 'index.php/coops/');
+					redirect( base_url() . 'index.php/coops');
 				}
 			}
 		}
@@ -90,7 +90,7 @@ class Places extends MY_Controller {
 			else
 			{
 				$this->places_model->set_places();
-				$this->index();
+				redirect( base_url() . 'index.php/coops');
 			}
 		}
 	}
@@ -129,7 +129,7 @@ class Places extends MY_Controller {
 				else
 				{
 					$this->places_model->delete_place($id);
-					redirect( base_url() . 'index.php/coops/');
+					redirect( base_url() . 'index.php/coops');
 				}
 			}
 				
