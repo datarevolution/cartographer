@@ -98,7 +98,7 @@ class Coops extends MY_Controller {
 				else
 				{
 					$this->coops_model->set_coops($id);
-					redirect( base_url() . 'index.php/coops/');
+					redirect( base_url() . 'index.php/coops');
 				}
 			}
 				
@@ -138,7 +138,7 @@ class Coops extends MY_Controller {
 				else
 				{
 					$this->coops_model->delete_coop($id);
-					redirect( base_url() . 'index.php/coops/');
+					redirect( base_url() . 'index.php/coops');
 				}
 			}
 				
@@ -175,7 +175,7 @@ class Coops extends MY_Controller {
 			else
 			{
 				$this->coops_model->set_coops();
-				$this->index();
+				redirect( base_url() . 'index.php/coops');
 			}
 		}
 	}
